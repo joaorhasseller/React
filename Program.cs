@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using RestAPI.Data;
 using RestAPI.Service;
 using RestAPI.Service.Implementation;
 
@@ -13,6 +15,13 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<IPersonService, PersonService>();
 
+var connectionString = builder.Configuration.GetConnectionString("Default");
+builder.Services.AddDbContext<AppDbContext>(opt =>
+    opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors());
+                
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

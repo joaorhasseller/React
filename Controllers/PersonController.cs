@@ -35,7 +35,7 @@ public class PersonController : ControllerBase
         if(person is null)
             return BadRequest();
 
-        return Ok(await Task.FromResult(_personService.CreatePesonAsyn(person)));
+        return Ok(await _personService.CreatePesonAsyn(person));
     }
 
     [HttpPut]
@@ -44,7 +44,7 @@ public class PersonController : ControllerBase
         if(person is null)
             return BadRequest();
 
-        return Ok(await Task.FromResult(_personService.UpdatePerson(person)));
+        return Ok(await _personService.UpdatePerson(person));
     }
 
     [HttpDelete("{id}")]

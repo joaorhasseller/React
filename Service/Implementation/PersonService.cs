@@ -1,59 +1,80 @@
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
+using RestAPI.Data;
 using RestAPI.Models;
 
 namespace RestAPI.Service.Implementation;
 
 public class PersonService : IPersonService
 {
-    private volatile int _cout;
+    private AppDbContext _context;
+
+    public PersonService(AppDbContext appDbContext)
+    {
+        _context = appDbContext;
+    }
+
     public async Task<Person> CreatePesonAsyn(Person person)
     {
-        return await Task.FromResult(person);
+        try
+        {
+            await _context.AddAsync(person);
+            await _context.SaveChangesAsync();
+            return person;
+        }
+        catch (OperationCanceledException ex)
+        {
+            throw;
+        }
     }
 
     public async void DeletePerson(int Id)
     {
-       
+        var person = await _context.Set<Person>().FirstOrDefaultAsync(x => x.Id.Equals(Id));
+        if(person is null)
+            throw new KeyNotFoundException("Pessoa não encontrada");
+
+        _context.Set<Person>().Remove(person);
     }
 
     public async Task<List<Person>> GetAllAsync()
     {
-        List<Person> persons = new();
-        for (int i = 0; i < 8; i++)
-            persons.Add(MockPerson(i));
-
-        return  await Task.FromResult(persons);
+        var teste = await _context.Set<Person>().ToListAsync();
+        return teste;
     }
-
-
 
     public async Task<Person> GetByIdAsyn(int Id)
     {
-        return await Task.FromResult(new Person(){
-            Id = IncrementAndGet(),
-            FirstName = "João",
-            LastName = "Rhasseller",
-            Gender = "M"
-        });
+        return await _context.Set<Person>().FirstOrDefaultAsync(x => x.Id.Equals(Id))
+        ?? throw new KeyNotFoundException("Não foi encontrado nenhuma Pessoa");
     }
 
     public async Task<Person> UpdatePerson(Person person)
     {
-        return await Task.FromResult(person);
-    }
-    
-    private Person MockPerson(int i)
-    {
-        return new Person(){
-            Id = IncrementAndGet(),
-            FirstName = "João",
-            LastName = "Rhasseller",
-            Gender = "M"
-        };
+        if(await Exist(person.Id))
+        {
+            try
+            {   
+                var entity = await _context.Set<Person>().FirstOrDefaultAsync(x => x.Id.Equals(person.Id));
+                if(entity is not null)
+                {
+                    _context.Entry(entity).CurrentValues.SetValues(person);
+                    await _context.SaveChangesAsync();
+                }
+                 return person;
+            }
+            catch (OperationCanceledException ex)
+            {
+                throw;
+            }
+        }
+        else
+            throw new KeyNotFoundException("Pessoa não existe");
     }
 
-    private int IncrementAndGet()
+    private async Task<bool> Exist(int id)
     {
-        return Interlocked.Increment(ref _cout);
+        return await _context.Set<Person>().AnyAsync(x => x.Id.Equals(id));
     }
 }
