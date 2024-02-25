@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using RestAPI.Business;
 using RestAPI.Models;
-using RestAPI.Service;
 
 namespace RestAPI.Controllers;
 
@@ -8,22 +8,22 @@ namespace RestAPI.Controllers;
 [Route("api/[controller]")]
 public class PersonController : ControllerBase
 {
-    private IPersonService _personService;
-    public PersonController(IPersonService personService)
+    private IPersonBusiness _personBusiness;
+    public PersonController(IPersonBusiness personService)
     {
-        _personService = personService;
+        _personBusiness = personService;
     }
 
     [HttpGet]
     public async Task<ActionResult<List<Person>>> GetAll()
     {
-       return  Ok(await _personService.GetAllAsync());
+       return  Ok(await _personBusiness.GetAllAsync());
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Person>> GetById(int id)
     {
-        var person = await _personService.GetByIdAsyn(id);
+        var person = await _personBusiness.GetByIdAsyn(id);
         if(person is null)
             return NotFound();
         return  Ok(person);
@@ -35,7 +35,7 @@ public class PersonController : ControllerBase
         if(person is null)
             return BadRequest();
 
-        return Ok(await _personService.CreatePesonAsyn(person));
+        return Ok(await _personBusiness.CreatePesonAsyn(person));
     }
 
     [HttpPut]
@@ -44,7 +44,7 @@ public class PersonController : ControllerBase
         if(person is null)
             return BadRequest();
 
-        return Ok(await _personService.UpdatePerson(person));
+        return Ok(await _personBusiness.UpdatePerson(person));
     }
 
     [HttpDelete("{id}")]

@@ -1,12 +1,12 @@
 using RestAPI.Models;
 
-namespace RestAPI.Service;
+namespace RestAPI.Business;
 
-public interface IPersonService
+public interface IPersonBusiness
 {
      Task<Person> CreatePesonAsyn(Person person);
      Task<Person> GetByIdAsyn(int Id);
      Task<Person> UpdatePerson(Person person);
      Task<List<Person>> GetAllAsync();
-     void DeletePerson(int Id);
+     Task DeletePerson(int Id);
 }

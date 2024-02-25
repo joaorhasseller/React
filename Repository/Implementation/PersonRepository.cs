@@ -1,16 +1,14 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using RestAPI.Data;
 using RestAPI.Models;
 
-namespace RestAPI.Service.Implementation;
+namespace RestAPI.Repository.Implementation;
 
-public class PersonService : IPersonService
+public class PersonRepository : IPersonRepository
 {
     private AppDbContext _context;
 
-    public PersonService(AppDbContext appDbContext)
+    public PersonRepository(AppDbContext appDbContext)
     {
         _context = appDbContext;
     }
@@ -29,7 +27,7 @@ public class PersonService : IPersonService
         }
     }
 
-    public async void DeletePerson(int Id)
+    public async Task DeletePerson(int Id)
     {
         var person = await _context.Set<Person>().FirstOrDefaultAsync(x => x.Id.Equals(Id));
         if(person is null)
@@ -73,8 +71,6 @@ public class PersonService : IPersonService
             throw new KeyNotFoundException("Pessoa não existe");
     }
 
-    private async Task<bool> Exist(int id)
-    {
-        return await _context.Set<Person>().AnyAsync(x => x.Id.Equals(id));
-    }
+    public async Task<bool> Exist(int id) => 
+        await _context.Set<Person>().AnyAsync(x => x.Id.Equals(id));
 }

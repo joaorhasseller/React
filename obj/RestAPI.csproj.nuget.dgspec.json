@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\UdemyProject\\RestAPI\\RestAPI.csproj": {}
+    "C:\\UdemyProject\\RestAPI\\RestAPI.csproj": {}
   },
   "projects": {
-    "c:\\UdemyProject\\RestAPI\\RestAPI.csproj": {
+    "C:\\UdemyProject\\RestAPI\\RestAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\UdemyProject\\RestAPI\\RestAPI.csproj",
+        "projectUniqueName": "C:\\UdemyProject\\RestAPI\\RestAPI.csproj",
         "projectName": "RestAPI",
-        "projectPath": "c:\\UdemyProject\\RestAPI\\RestAPI.csproj",
+        "projectPath": "C:\\UdemyProject\\RestAPI\\RestAPI.csproj",
         "packagesPath": "C:\\Users\\joaor\\.nuget\\packages\\",
-        "outputPath": "c:\\UdemyProject\\RestAPI\\obj\\",
+        "outputPath": "C:\\UdemyProject\\RestAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\joaor\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Evolve": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.2, )"
@@ -62,6 +66,18 @@
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[5.0.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

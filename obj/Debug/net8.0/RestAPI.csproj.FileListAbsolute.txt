@@ -116,3 +116,13 @@ C:\UdemyProject\RestAPI\obj\Debug\net8.0\refint\RestAPI.dll
 C:\UdemyProject\RestAPI\obj\Debug\net8.0\RestAPI.pdb
 C:\UdemyProject\RestAPI\obj\Debug\net8.0\RestAPI.genruntimeconfig.cache
 C:\UdemyProject\RestAPI\obj\Debug\net8.0\ref\RestAPI.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Evolve.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Serilog.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\UdemyProject\RestAPI\bin\Debug\net8.0\Serilog.Sinks.File.dll
